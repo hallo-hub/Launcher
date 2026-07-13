@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NY Streets Launcher</title>
+
+<style>
+body {
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:30px;
+}
+
+button {
+    padding:15px;
+    margin:10px;
+    font-size:18px;
+}
+
+.card {
+    background:#222;
+    padding:20px;
+    border-radius:15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🎮 NY Streets Launcher</h1>
+
+<p id="version">
+Version wird geprüft...
+</p>
+
+<button onclick="startGame()">
+▶ Spiel starten
+</button>
+
+<p id="status"></p>
+
+</div>
+
+
+<script>
+
+const versionURL =
+"DEIN_RAW_LINK_ZU_version.json";
+
+
+let spielDatei = "";
+
+
+fetch(versionURL)
+.then(response => response.json())
+.then(data => {
+
+document.getElementById("version").innerHTML =
+"Version: " + data.version;
+
+spielDatei = data.game;
+
+})
+.catch(() => {
+
+document.getElementById("status").innerHTML =
+"❌ Update-Server nicht erreichbar";
+
+});
+
+
+function startGame(){
+
+if(spielDatei != ""){
+
+window.location.href = spielDatei;
+
+}
+
+else {
+
+document.getElementById("status").innerHTML =
+"Spiel nicht gefunden";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
